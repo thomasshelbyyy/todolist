@@ -1,8 +1,15 @@
-body {
+/* * {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body { */
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  /* font-family: "Oswald", sans-serif;
+  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +17,159 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Oswald", Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+.main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem;
+}
+
+.utility {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.utility div {
+  display: flex;
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: .3s;
+  text-indent: 1rem;
+}
+
+.modal-input {
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  transition: .3s;
+  text-indent: 1rem;
+}
+
+.hide {
+  display: none;
+  transition: 0.3s;
+}
+
+.btn {
+  font-size: 1.7rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  border: none;
+}
+
+.btn-primary {
+  background-color: rgb(9,122,235);
+  color: #fff;
+  font-size: 1rem;
+  padding: .4rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: rgb(15, 15, 154);
+}
+
+.task-list {
+  width: 50%;
+  padding: 2rem;
+}
+
+.task {
+  font-size: 1.3rem;
+  cursor: default;
+}
+.task-list i {
+  font-size: 1.4rem;
+  padding: .7rem;
+}
+
+.task-list ul li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-list ul li:nth-child(odd) {
+  background-color: blanchedalmond;
+}
+
+.task {
+  padding-left: 1rem;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
+.button-group i{
+  border: none;
+}
+
+/* CSS FOR SELECT */
+select {
+  background-color: #097aeb;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+/* CSS FOR MODALS */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
 }
