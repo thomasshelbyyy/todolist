@@ -3,23 +3,23 @@ import AddNewTask from "./components/AddNewTask";
 import Modals from "./components/Modals";
 import TaskList from "./components/TaskList";
 import SelectInput from "./components/SelectInput";
-import React from "react"
+import { useState, useEffect } from "react"
 import {nanoid} from "nanoid"
 
 function App() {
 
-    const [addNew, setAddNew] = React.useState(false)
-    const [search, setSearch] = React.useState(false)
+    const [addNew, setAddNew] = useState(false)
+    const [search, setSearch] = useState(false)
 
-    const [modal, setModal] = React.useState(false);
+    const [modal, setModal] = useState(false);
 
-    const [addNewInputValue, setAddNewInputValue] = React.useState('')
-    const [searchInputValue, setSearchInputValue] = React.useState('')
-    const [selectedOption, setSelectedOption] = React.useState('')
+    const [addNewInputValue, setAddNewInputValue] = useState('')
+    const [searchInputValue, setSearchInputValue] = useState('')
+    const [selectedOption, setSelectedOption] = useState('')
     // Coba pakai object
-    const [editInputValue, setEditInputValue] = React.useState({})
+    const [editInputValue, setEditInputValue] = useState({})
 
-    const [tasks, setTasks] = React.useState(JSON.parse(localStorage.getItem("tasks")) || [])
+    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || [])
 
 
     function toggleInput(input) {
@@ -32,7 +32,7 @@ function App() {
         }
     }
 
-    React.useEffect(()=> {
+    useEffect(()=> {
         localStorage.setItem('tasks', JSON.stringify(tasks))
     }, [tasks])
 
@@ -47,19 +47,13 @@ function App() {
     }
 
     function storeTask(event) {
-        if(event.keyCode === 27) {
-            setAddNew(false)
+        event.preventDefault()
+        if(!addNewInputValue) {
+            alert("Please fill the input field")
+            return
         }
-        if(event.keyCode === 13) {
-            event.preventDefault()
-            if(!addNewInputValue) {
-                alert('please fill this field')
-                return
-            }
-            addTask(addNewInputValue)
-            setAddNewInputValue('')
-        }
-
+        addTask(addNewInputValue)
+        setAddNewInputValue('')
     }
 
     function addTask(task) {
@@ -75,19 +69,19 @@ function App() {
         }));
     }
 
-    function handleEdit(event, id) {
-        if(event.keyCode === 13) {
-            event.preventDefault()
-            const index = tasks.findIndex(task => task.id === id)
-            const editedObject = {...editInputValue, body: event.target.value}
-            const newArray = [editedObject, ...tasks.slice(0, index), ...tasks.slice(index + 1)]
-            setTasks(newArray)
-            setModal(false)
-        }
+    function handleEdit(value, id) {
+        const index = tasks.findIndex(task => task.id === id)
+        const editedObject = {...editInputValue, body: value}
+        const newArray = [editedObject, ...tasks.slice(0, index), ...tasks.slice(index + 1)]
+        setTasks(newArray)
+        setModal(false)
     }
 
     function handleDelete(id) {
-        setTasks(tasks.filter(task => task.id !== id));
+        const deleteConfirm = window.confirm('are you sure you want to delete this task?')
+        if(deleteConfirm) {
+            setTasks(tasks.filter(task => task.id !== id));
+        }
     }
 
     const handleClose = () => {
@@ -171,7 +165,7 @@ function App() {
                 <Modals 
                 onClose={handleClose}
                 handleChange={handleEditChange}
-                inputValue={editInputValue.body}
+                initialInputValue={editInputValue.body}
                 id={editInputValue.id}
                 handleEdit={handleEdit}
                 />

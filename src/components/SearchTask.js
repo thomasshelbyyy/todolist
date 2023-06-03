@@ -6,6 +6,7 @@ function SearchTask(props) {
     return(
         <div>
             <span className="btn" onClick={()=> props.toggleInput("search")}><Search /></span>
+
             <input 
             type="text" 
             className={props.search ? "input" : "input hide"} 
